@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
-const Cliente = mongoose.model('Cliente',
-  new mongoose.Schema({ nombre: String, apellidos: String })
+const Jugador = mongoose.model('Jugador',
+    new mongoose.Schema({ nombre: String, posicion: String, dorsal: Number })
 );
 
-const Articulo = mongoose.model('Articulo',
-  new mongoose.Schema({ nombre: String, precio: Number })
+const Equipo = mongoose.model('Equipo',
+    new mongoose.Schema({ nombre: String, liga: String, numeroTitulos: Number })
 );
 
 module.exports = {
-  Cliente: Cliente,
-  Articulo: Articulo
+    Jugador: Jugador,
+    Equipo: Equipo
 }
 
 // Otra forma más corta:
 // module.exports = {
-//     Cliente,
-//     Articulo
+//     Jugador,
+//     Equipo
 // }

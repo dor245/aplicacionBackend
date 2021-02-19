@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Tienda Backend</title>
+    <title>FIFA Backend</title>
     <meta charset="UTF-8">
 
     <meta name="description" content="Fullstack example">
@@ -14,93 +14,93 @@
 
     <style>
         @import url("https://fonts.googleapis.com/css?family=Aclonica");
-
         * {
             margin: 0;
             padding: 0;
         }
-
+        
         body {
             font-family: "Aclonica";
         }
+        
         a {
             text-decoration: none;
         }
-
+        
         h1,
         div,
         img,
         p {
             padding: 10px;
         }
-
+        
         div {
             padding-left: 30px;
         }
-
-
+        
         .bloque {
             display: flex;
             flex-direction: column;
         }
-
+        
         .metodo {
             margin: 0 0 15px;
             border: 1px solid #000;
             border-radius: 4px;
             box-shadow: 0 0 3px rgba(0, 0, 0, .19);
         }
-
+        
         .get {
             border-color: #61affe;
             background: rgba(97, 175, 254, .1);
         }
-
+        
         .post {
             border-color: #49cc90;
             background: rgba(73, 204, 144, .1);
         }
-
+        
         .delete {
             border-color: #f93e3e;
             background: rgba(249, 62, 62, .1);
         }
-
+        
         .update {
             border-color: #fca130;
             background: rgba(252, 161, 48, .1);
         }
-
+        
         .http-get {
             background: #61affe;
         }
-
+        
         .http-post {
             background: #49cc90;
         }
-
+        
         .http-delete {
             background: #f93e3e;
         }
-
+        
         .http-update {
             background: #fca130;
         }
-
+        
         .resumen {
             display: flex;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
             align-items: center;
             padding: 5px;
         }
-
+        
         .cabecera {
             display: flex;
             align-items: center;
             padding: 1px;
-            background: #fdebc9;;
+            background: #fdebc9;
+            ;
         }
-
+        
         .metodo-verbo {
             font-size: 14px;
             font-weight: 700;
@@ -112,7 +112,7 @@
             font-family: sans-serif;
             color: #fff;
         }
-
+        
         .metodo-ruta {
             display: flex;
             align-items: center;
@@ -122,7 +122,7 @@
             font-weight: 600;
             color: #3b4151;
         }
-
+        
         .metodo-descripcion {
             padding-top: 10px;
             font-size: 13px;
@@ -131,7 +131,7 @@
             font-family: sans-serif;
             color: #3b4151;
         }
-
+        
         h4 {
             border-bottom: 5px rgb(102, 100, 99);
             margin-bottom: 5px;
@@ -141,74 +141,73 @@
 
 <body>
     <div class="cabecera">
-        <img src="/favicon.png">
-        <h1>Tienda Backend</h1>
+        <img src="favicon.png" style="width: 100px; height: 50px;">
+        <h1>FIFA Backend</h1>
     </div>
-    <p><small>Frontend en <a href="https://tiendafrontend.now.sh/">https://tiendafrontend.now.sh</a></small></p>
 
     <p><b>API RESTful</b></p>
 
     <div class="bloque">
-        <h4>ARTÍCULOS</h4>
+        <h4>EQUIPOS</h4>
         <div class="resumen metodo get">
             <span class="metodo-verbo http-get">GET</span>
-            <span class="metodo-ruta">/api/articulos</span>
-            <span class="metodo-descripcion">Obtener todos los artículos.</span>
+            <span class="metodo-ruta">/api/equipos</span>
+            <span class="metodo-descripcion">Obtener todos los equipos.</span>
         </div>
         <div class="resumen metodo post">
             <span class="metodo-verbo http-post">POST</span>
-            <span class="metodo-ruta">/api/articulos</span>
-            <span class="metodo-descripcion">Añadir un artículo.</span>
+            <span class="metodo-ruta">/api/equipos</span>
+            <span class="metodo-descripcion">Añadir un equipo.</span>
         </div>
         <div class="resumen metodo get">
             <span class="metodo-verbo http-get">GET</span>
-            <span class="metodo-ruta">/api/articulos/{id}</span>
-            <span class="metodo-descripcion">Obtener un artículo.</span>
+            <span class="metodo-ruta">/api/equipos/{id}</span>
+            <span class="metodo-descripcion">Obtener un equipo.</span>
         </div>
         <div class="resumen metodo update">
             <span class="metodo-verbo http-update">UPDATE</span>
-            <span class="metodo-ruta">/api/articulos/{id}</span>
-            <span class="metodo-descripcion">Modificar un artículo.</span>
+            <span class="metodo-ruta">/api/equipos/{id}</span>
+            <span class="metodo-descripcion">Modificar un equipo.</span>
         </div>
         <div class="resumen metodo delete">
             <span class="metodo-verbo http-delete">DELETE</span>
-            <span class="metodo-ruta">/api/articulos/{id}</span>
-            <span class="metodo-descripcion">Eliminar un artículo.</span>
+            <span class="metodo-ruta">/api/equipos/{id}</span>
+            <span class="metodo-descripcion">Eliminar un equipo.</span>
         </div>
     </div>
 
     <div class="bloque">
-        <h4>CLIENTES</h4>
+        <h4>JUGADORES</h4>
         <div class="resumen metodo get">
             <span class="metodo-verbo http-get">GET</span>
-            <span class="metodo-ruta">/api/clientes</span>
-            <span class="metodo-descripcion">Obtener todos los clientes.</span>
+            <span class="metodo-ruta">/api/jugadores</span>
+            <span class="metodo-descripcion">Obtener todos los jugadores.</span>
         </div>
         <div class="resumen metodo post">
             <span class="metodo-verbo http-post">POST</span>
-            <span class="metodo-ruta">/api/clientes</span>
-            <span class="metodo-descripcion">Añadir un cliente.</span>
+            <span class="metodo-ruta">/api/jugadores</span>
+            <span class="metodo-descripcion">Añadir un jugador.</span>
         </div>
         <div class="resumen metodo get">
             <span class="metodo-verbo http-get">GET</span>
-            <span class="metodo-ruta">/api/clientes/{id}</span>
-            <span class="metodo-descripcion">Obtener un cliente.</span>
+            <span class="metodo-ruta">/api/jugadores/{id}</span>
+            <span class="metodo-descripcion">Obtener un jugador.</span>
         </div>
         <div class="resumen metodo update">
             <span class="metodo-verbo http-update">UPDATE</span>
-            <span class="metodo-ruta">/api/clientes/{id}</span>
-            <span class="metodo-descripcion">Modificar un cliente.</span>
+            <span class="metodo-ruta">/api/jugadores/{id}</span>
+            <span class="metodo-descripcion">Modificar un jugador.</span>
         </div>
         <div class="resumen metodo delete">
             <span class="metodo-verbo http-delete">DELETE</span>
-            <span class="metodo-ruta">/api/clientes/{id}</span>
-            <span class="metodo-descripcion">Eliminar un cliente.</span>
+            <span class="metodo-ruta">/api/jugadores/{id}</span>
+            <span class="metodo-descripcion">Eliminar un jugador.</span>
         </div>
     </div>
     <p>
         <small>
             <b>Código fuente en
-                <a href="https://github.com/jamj2000/tiendabackend">https://github.com/jamj2000/tiendabackend</a>
+                <a href="https://github.com/dor245/aplicacionBackend">https://github.com/dor245/aplicacionBackend</a>
             </b>
         </small>
     </p>
