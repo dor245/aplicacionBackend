@@ -1,14 +1,14 @@
 # BACKEND (con Node, Express y MongoDB)
 
-> **ESTE MINITUTORIAL ES UNA VERSIÓN RESUMIDA DEL BACKEND DE ESTA APLICACIÓN**
+> **API REST - FIFABackend**
 > 
-> Demo desplegada en [Heroku](https://tiendabackend.herokuapp.com)
+> Demo desplegada en [Heroku](https://fifabackend.herokuapp.com/)
 >
 > A tener en cuenta:
 >
 > - Mucho del código que aparece en este minitutorial está simplificado con fines didácticos.
 > - Para ver todo el código, revisar el código fuente de este repositorio.
-> - **La parte frontend de esta aplicación puede verse en [tiendafrontend](https://github.com/jamj2000/tiendafrontend)**
+> - **La parte frontend de esta aplicación puede verse en [fifafrontend](https://github.com/dor245/aplicacionFrontend.git)**
 
 
 ## Introducción
@@ -39,8 +39,8 @@ O, si deseamos una versión más actualizada, podemos recurrir al sitio oficial 
 Para iniciar el proyecto hacemos:
 
 ```
-mkdir  tiendabackend
-cd     tiendabackend
+mkdir  fifabackend
+cd     fifabackend
 
 npm  init  -y
 ```
@@ -64,10 +64,10 @@ El archivo `package.json` tendrá una apariencia semejante a la siguiente:
 
 ```
 {
-  "name": "tiendabackend",
+  "name": "fifabackend",
   "version": "1.0.0",
   "description": "Backend of a Fullstack webapp",
-  "author": "jamj2000 at google dot com",
+  "author": "dor245 at google dot com",
   "license": "GPL",
   "main": "server.js",
   "scripts": {
@@ -146,10 +146,10 @@ Si echamos un vistazo al archivo **`package.json`** veremos que dichos paquetes 
 
 ```
 {
-  "name": "tiendabackend",
+  "name": "fifabackend",
   "version": "1.0.0",
   "description": "Backend of a Fullstack webapp",
-  "author": "jamj2000 at google dot com",
+  "author": "dor245 at google dot com",
   "license": "GPL",
   "main": "server.js",
   "scripts": {
@@ -247,7 +247,7 @@ const DB_URI = process.env.DB_URI;
 
 Si la variable `PORT` no está definida en el archivo `.env`, entonces se utiliza el valor 3000. En nuestro caso, es mejor no definir dicha variable.
 
-La variable `DB_URI` debe estar definida en el archivo `.env` sino la conexión a la base de datos fallará. Dicha variable contiene la URL de la base de datos. Consulta más abajo, en el apartado [Base de datos](https://github.com/jamj2000/tiendabackend#base-de-datos).
+La variable `DB_URI` debe estar definida en el archivo `.env` sino la conexión a la base de datos fallará. Dicha variable contiene la URL de la base de datos. Consulta más abajo, en el apartado [Base de datos](https://github.com/dor245/aplicacionbackend#base-de-datos).
 
 
 ### Conectando a una base de datos
@@ -286,17 +286,17 @@ Todo el código fuente del servidor está disponible en el archivo **[`server.js
 Este backend proporpociona una **API Rest** con los siguientes **end-points**:
 
 ```
-(GET)    /api/clientes         (Lista    todos los clientes)
-(POST)   /api/clientes         (Crea     cliente)
-(GET)    /api/clientes/:id     (Lista    cliente :id)
-(PUT)    /api/clientes/:id     (Modifica cliente :id)
-(DELETE) /api/clientes/:id     (Elimina  cliente :id)
+(GET)    /api/jugadores         (Lista    todos los jugadores)
+(POST)   /api/jugadores         (Crea     jugador)
+(GET)    /api/jugadores/:id     (Lista    jugador :id)
+(PUT)    /api/jugadores/:id     (Modifica jugador :id)
+(DELETE) /api/jugadores/:id     (Elimina  jugador :id)
 
-(GET)    /api/articulos        (Lista    todos los artículos)
-(POST)   /api/articulos        (Crea     artículo)
-(GET)    /api/articulos/:id    (Lista    artículo :id)
-(PUT)    /api/articulos/:id    (Modifica artículo :id)
-(DELETE) /api/articulos/:id    (Elimina  artículo :id)
+(GET)    /api/equipos        (Lista    todos los equipos)
+(POST)   /api/equipos        (Crea     equipo)
+(GET)    /api/equipos/:id    (Lista    equipo :id)
+(PUT)    /api/equipos/:id    (Modifica equipo :id)
+(DELETE) /api/equipos/:id    (Elimina  equipo :id)
 ```
 
 El código fuente usado es:
@@ -310,11 +310,11 @@ const router = express.Router();
 
 // --------------- API REST CRUD
 
-router.get    ("/clientes",      cors(), controller.readClientes);   // Read All
-router.get    ("/clientes/:id",  cors(), controller.readCliente);    // Read
-router.delete ("/clientes/:id",  cors(), controller.deleteCliente);  // Delete
-router.put    ("/clientes/:id",  cors(), controller.updateCliente);  // Update
-router.post   ("/clientes",      cors(), controller.createCliente);  // Create
+router.get    ("/jugadores",      cors(), controller.readJugadores);   // Read All
+router.get    ("/jugadores/:id",  cors(), controller.readJugador);    // Read
+router.delete ("/jugadores/:id",  cors(), controller.deleteJugador);  // Delete
+router.put    ("/jugadores/:id",  cors(), controller.updateJugador);  // Update
+router.post   ("/jugadores",      cors(), controller.createJugador);  // Create
 
 // ...
 
@@ -330,10 +330,10 @@ Todo el código fuente de las rutas está disponible en el archivo **[`routes.js
 Los controladores son los encargados de realizar las operaciones CRUD. Para ello hacen uso de los modelos definidos.
 
 ```javascript
-const { Cliente, Articulo } = require("./models.js");
+const { Jugador, Equipo } = require("./models.js");
 
-exports.readClientes = (req, res) => 
-    Cliente.find({}, (err, data) => {
+exports.readJugadores = (req, res) => 
+    Jugador.find({}, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
@@ -347,17 +347,17 @@ Todo el código fuente de los controladores está disponible en el archivo **[`c
 
 Tenemos 2 modelos:
 
-- Cliente 
-- Artículo
+- Jugador 
+- Equipo
 
 Cada uno tiene un esquema asociado que, en este caso, es bastante simple. Cada modelo tiene únicamente 2 propiedades:
 
 ```javascript
-const Cliente = mongoose.model('Cliente',
+const Jugador = mongoose.model('Jugador',
   new mongoose.Schema({ nombre: String, apellidos: String })
 );
 
-const Articulo = mongoose.model('Articulo',
+const Equipo = mongoose.model('Equipo',
   new mongoose.Schema({ nombre: String, precio: Number })
 );
 ```
